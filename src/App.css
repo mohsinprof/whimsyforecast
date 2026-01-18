@@ -72,7 +72,11 @@ body::before {
 		"content sidebar2";
 	gap: 28px;
 }
-
+.logo {
+	width: 150px;
+	height: auto;
+	object-fit: contain;
+}
 .weatherapp {
 	grid-area: header;
 	margin: 0;

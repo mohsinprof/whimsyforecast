@@ -7,6 +7,7 @@ import RecentCities from "./components/RecentCities.tsx";
 import WeatherDisplay from "./components/WeatherDisplay.tsx";
 import { initialState, weatherReducer } from "./reducers/weatherReducer.ts";
 import type { GeoLocation } from "./types/geo.ts";
+import logo from "../src/assets/Gemini_Generated_Image_fhv2njfhv2njfhv2-removebg-preview.png";
 import {
 	addRecentCity,
 	loadRecentCities,
@@ -56,8 +57,9 @@ const App = () => {
 	return (
 		<div>
 			<div className="weatherapp">
-				<h1>Weather App</h1>
+				<img className="logo" src={logo} alt="Weather App Logo" />
 
+				<h1>whimsy forecast</h1>
 				<Form dispatch={dispatch} state={state} />
 			</div>
 			<div className="recentcities">
@@ -66,10 +68,7 @@ const App = () => {
 					onSelect={(city) => void selectCityAndFetch(city)}
 				/>
 			</div>{" "}
-			<div
-				className="citylist"
-				style={{ display: state.results.length === 0 ? "none" : "block" }}
-			>
+			<div className="citylist">
 				<CityList
 					items={state.results}
 					onSelect={handleSelectResult}
