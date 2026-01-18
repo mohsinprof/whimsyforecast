@@ -13,23 +13,26 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ dispatch, state }) => {
-	const handlesubmit = async (e: FormEvent) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		if (state.query.length > 2) {
-			try {
-				dispatch({ type: "SEARCH_START" });
-				const results = await searchLocation(state.query);
-				dispatch({ type: "SEARCH_SUCCESS", payload: results });
-			} catch (e) {
-				const message = e instanceof Error ? e.message : "unknown error";
-				dispatch({ type: "SEARCH_ERROR", payload: message });
+		const query = state.query.trim();
+		if (query.length <= 2 || state.searching) return;
+		try {
+			dispatch({ type: "SEARCH_START" });
+			const results = await searchLocation(query);
+			dispatch({ type: "SEARCH_SUCCESS", payload: results });
+		} catch (error) {
+			if (error instanceof DOMException && error.name === "AbortError") {
+				return;
 			}
+			const message = error instanceof Error ? error.message : "unknown error";
+			dispatch({ type: "SEARCH_ERROR", payload: message });
 		}
 	};
 
 	return (
 		<div className="form">
-			<form onSubmit={handlesubmit}>
+			<form onSubmit={handleSubmit}>
 				<input
 					value={state.query}
 					onChange={(e) =>
@@ -39,7 +42,7 @@ const Form: React.FC<FormProps> = ({ dispatch, state }) => {
 				<button
 					className="search-button"
 					type={"submit"}
-					disabled={state.searching}
+					disabled={state.searching || state.query.trim().length <= 2}
 				>
 					{state.searching ? "searching...." : "search"}
 				</button>

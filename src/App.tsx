@@ -1,18 +1,18 @@
-import Form from "./components/Form.tsx";
-import CityList from "./components/CityList.tsx";
-import { initialState, weatherReducer } from "./reducers/weatherReducer.ts";
 import { useEffect, useReducer } from "react";
+import { fetchForecast } from "./api/openMeteo.ts";
+import "./App.css";
+import CityList from "./components/CityList.tsx";
+import Form from "./components/Form.tsx";
 import RecentCities from "./components/RecentCities.tsx";
+import WeatherDisplay from "./components/WeatherDisplay.tsx";
+import { initialState, weatherReducer } from "./reducers/weatherReducer.ts";
+import type { GeoLocation } from "./types/geo.ts";
 import {
 	addRecentCity,
 	loadRecentCities,
 	type RecentCity,
 	saveRecentCities,
 } from "./utils/recentCities.ts";
-import type { GeoLocation } from "./types/geo.ts";
-import { fetchForecast } from "./api/openMeteo.ts";
-import WeatherDisplay from "./components/WeatherDisplay.tsx";
-import "./App.css";
 const toRecentCity = (item: GeoLocation): RecentCity => ({
 	id: item.id,
 	name: item.name,
@@ -61,20 +61,27 @@ const App = () => {
 				<Form dispatch={dispatch} state={state} />
 			</div>
 			<div className="recentcities">
-			<RecentCities
-				items={state.recent}
-				onSelect={(city) => void selectCityAndFetch(city)}
-			/></div> <div className="citylist"><CityList
-				items={state.results}
-				onSelect={handleSelectResult}
-				error={state.error}
-			/></div> <div className="weatherdisplay"><WeatherDisplay
-				selected={state.selected}
-				loading={state.searching}
-				error={state.error}
-				current={state.current}
-				forecast={state.forecast}
-			/></div>
+				<RecentCities
+					items={state.recent}
+					onSelect={(city) => void selectCityAndFetch(city)}
+				/>
+			</div>{" "}
+			<div className="citylist">
+				<CityList
+					items={state.results}
+					onSelect={handleSelectResult}
+					error={state.error}
+				/>
+			</div>{" "}
+			<div className="weatherdisplay">
+				<WeatherDisplay
+					selected={state.selected}
+					loading={state.loadingWeather}
+					error={state.error}
+					current={state.current}
+					forecast={state.forecast}
+				/>
+			</div>
 		</div>
 	);
 };
