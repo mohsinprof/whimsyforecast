@@ -66,7 +66,10 @@ const App = () => {
 					onSelect={(city) => void selectCityAndFetch(city)}
 				/>
 			</div>{" "}
-			<div className="citylist">
+			<div
+				className="citylist"
+				style={{ display: state.results.length === 0 ? "none" : "block" }}
+			>
 				<CityList
 					items={state.results}
 					onSelect={handleSelectResult}
