@@ -19,7 +19,7 @@ It shows current weather, hourly/forecast details, city search, and favourite ci
 npm install
 ```
 
-### 2) Add environment variables
+### 2) Add environment variables . 
 
 Create a `.env` file in the project root:
 
