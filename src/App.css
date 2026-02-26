@@ -1,45 +1,154 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-spring-green-50: #eefff7;
+--color-spring-green-100: #d6ffef;
+--color-spring-green-200: #b0ffe1;
+--color-spring-green-300: #74ffca;
+--color-spring-green-400: #30f8ab;
+--color-spring-green-500: #06f99c;
+--color-spring-green-600: #00bc73;
+--color-spring-green-700: #02935c;
+--color-spring-green-800: #08734c;
+--color-spring-green-900: #095e40;
+--color-spring-green-950: #003522;
+
+
+  
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
+    --radius-3xl: calc(var(--radius) + 12px);
+    --radius-4xl: calc(var(--radius) + 16px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
 :root {
-	color-scheme: light;
-	font-family:
-		"Inter",
-		system-ui,
-		-apple-system,
-		sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-	color: #0f172a;
-	background-color: #f8fafc;
+  --radius: 0.625rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.141 0.005 285.823);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.141 0.005 285.823);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.141 0.005 285.823);
+
+  /* ✅ BRAND PRIMARY (spring-green-600) */
+  --primary: #00bc73;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eefff7;
+  --secondary-foreground: #08734c;
+
+  --muted: #d6ffef;
+  --muted-foreground: #095e40;
+
+  --accent: #d6ffef;
+  --accent-foreground: #08734c;
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: #b0ffe1;
+  --input: #b0ffe1;
+
+  /* Focus ring */
+  --ring: #30f8ab;
+
+  /* Sidebar aligned with brand */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #095e40;
+  --sidebar-primary: #00bc73;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #d6ffef;
+  --sidebar-accent-foreground: #08734c;
+  --sidebar-border: #b0ffe1;
+  --sidebar-ring: #30f8ab;
 }
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+.dark {
+  --background: #003522;
+  --foreground: #eefff7;
+
+  --card: #095e40;
+  --card-foreground: #eefff7;
+
+  --popover: #095e40;
+  --popover-foreground: #eefff7;
+
+  /* ✅ Dark mode primary = 500 (better glow) */
+  --primary: #06f99c;
+  --primary-foreground: #003522;
+
+  --secondary: #08734c;
+  --secondary-foreground: #eefff7;
+
+  --muted: #095e40;
+  --muted-foreground: #b0ffe1;
+
+  --accent: #08734c;
+  --accent-foreground: #eefff7;
+
+  --destructive: oklch(0.704 0.191 22.216);
+
+  --border: #08734c;
+  --input: #08734c;
+
+  --ring: #30f8ab;
+
+  --sidebar: #003522;
+  --sidebar-foreground: #eefff7;
+  --sidebar-primary: #06f99c;
+  --sidebar-primary-foreground: #003522;
+  --sidebar-accent: #08734c;
+  --sidebar-accent-foreground: #eefff7;
+  --sidebar-border: #08734c;
+  --sidebar-ring: #30f8ab;
 }
 
-body {
-	min-height: 100vh;
-}
 
-#root {
-	min-height: 100vh;
-}
-
-.page {
-	display: grid;
-	place-content: center;
-	gap: 0.75rem;
-	min-height: 100vh;
-	text-align: center;
-	padding: 2rem;
-}
-
-.page h1 {
-	font-size: clamp(2rem, 6vw, 3.5rem);
-	letter-spacing: -0.03em;
-}
-
-.page p {
-	font-size: 1.05rem;
-	color: #475569;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
 }
