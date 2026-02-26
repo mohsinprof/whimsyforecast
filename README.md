@@ -1,73 +1,81 @@
-# React + TypeScript + Vite
+# Whimsy Forecast
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern weather dashboard built with React, TypeScript, Vite, and Tailwind.  
+It shows current weather, hourly/forecast details, city search, and favourite cities.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS
+- TanStack React Query
+- React Router
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1) Install dependencies
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-	globalIgnores(["dist"]),
-	{
-		files: ["**/*.{ts,tsx}"],
-		extends: [
-			// Other configs...
-
-			// Remove tseslint.configs.recommended and replace with this
-			tseslint.configs.recommendedTypeChecked,
-			// Alternatively, use this for stricter rules
-			tseslint.configs.strictTypeChecked,
-			// Optionally, add this for stylistic rules
-			tseslint.configs.stylisticTypeChecked,
-
-			// Other configs...
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2) Add environment variables
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+Create a `.env` file in the project root:
 
-export default defineConfig([
-	globalIgnores(["dist"]),
-	{
-		files: ["**/*.{ts,tsx}"],
-		extends: [
-			// Other configs...
-			// Enable lint rules for React
-			reactX.configs["recommended-typescript"],
-			// Enable lint rules for React DOM
-			reactDom.configs.recommended,
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+```env
+VITE_OPENWEATHER_API_KEY=your_openweather_api_key
 ```
+
+### 3) Run development server
+
+```bash
+npm run dev
+```
+
+## Available Scripts
+
+- `npm run dev` - Start local development server
+- `npm run build` - Type-check and create production build
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+Output is generated in the `dist/` folder.
+
+## Deployment
+
+Recommended options:
+
+- Vercel
+- Netlify
+- Cloudflare Pages
+
+For all platforms:
+
+1. Connect your GitHub repository
+2. Set build command: `npm run build`
+3. Set output directory: `dist`
+4. Add environment variable: `VITE_OPENWEATHER_API_KEY`
+
+## API Key Security Note
+
+Frontend environment variables (like `VITE_*`) are included in client bundles and are not fully secret.
+
+For stronger protection:
+
+- Move weather API calls to a backend/serverless function
+- Store the real API key on the server as a private env variable
+- Call your backend endpoint from the frontend
+
+## Project Structure
+
+- `src/api/` - API config, types, and weather service
+- `src/components/` - UI and feature components
+- `src/hooks/` - Custom hooks (weather, geolocation, favourites, storage)
+- `src/pages/` - Route-level pages
