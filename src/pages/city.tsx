@@ -31,7 +31,7 @@ const City = () => {
       <FavouriteButton data={{...weatherQuery.data,name:params.name}} />
 </div>
     <div className="grid gap-6">
-					<div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-4">
 						<CurrentWeather data={weatherQuery.data}  />
 						<HourlyTempreture data={forecastQuery.data} />
 					</div>

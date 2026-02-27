@@ -29,7 +29,6 @@ export default function WeatherDashboard() {
 				try { await getLocation(); } catch (error) {
 					console.error("Error fetching location:", error);
 				}
-				console.log("Auto-refecting weather data... count:", countRef.current);
 				countRef.current += 1;
 				locationQuery.refetch();
 				

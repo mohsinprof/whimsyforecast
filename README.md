@@ -19,12 +19,12 @@ It shows current weather, hourly/forecast details, city search, and favourite ci
 npm install
 ```
 
-### 2) Add environment variables . 
+### 2) Add environment variables
 
 Create a `.env` file in the project root:
 
 ```env
-VITE_OPENWEATHER_API_KEY=your_openweather_api_key
+VITE_API_BASE_URL=http://localhost:5000
 ```
 
 ### 3) Run development server
@@ -61,7 +61,7 @@ For all platforms:
 1. Connect your GitHub repository
 2. Set build command: `npm run build`
 3. Set output directory: `dist`
-4. Add environment variable: `VITE_OPENWEATHER_API_KEY`
+4. Add environment variable: `VITE_API_BASE_URL` (your deployed backend URL)
 
 ## API Key Security Note
 
@@ -72,6 +72,17 @@ For stronger protection:
 - Move weather API calls to a backend/serverless function
 - Store the real API key on the server as a private env variable
 - Call your backend endpoint from the frontend
+
+### Backend env (not in frontend repo)
+
+Your backend should store:
+
+```env
+WEATHER_API_KEY=your_openweather_api_key
+PORT=5000
+```
+
+Do not commit backend `.env` to GitHub.
 
 ## Project Structure
 
