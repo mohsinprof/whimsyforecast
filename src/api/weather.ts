@@ -27,38 +27,50 @@ class WeatherApi{
     }
         return response.json();
     }
+
+    private getApiKey(): string {
+        if (!API_CONFIG.API_KEY) {
+            throw new Error("Missing VITE_OPENWEATHER_API_KEY in root .env");
+        }
+        return API_CONFIG.API_KEY;
+    }
+
     async getCurrentWeather({lat,lon}:Coordinates):Promise<Weatherdata>{
-        const url = this.createUrl(`${API_CONFIG.BASE_URL}/api/weather/current`,{
+        const url = this.createUrl(`${API_CONFIG.WEATHER_BASE_URL}/weather`,{
             lat : lat.toString(),
             lon : lon.toString(),
-            units:API_CONFIG.DEFAULT_PARAMS.units
+            units:API_CONFIG.DEFAULT_PARAMS.units,
+            appid: this.getApiKey(),
 
     });
         return this.fetchData<Weatherdata>(url);
 }
     async getForecast({lat,lon}:Coordinates):Promise<ForecastData>{
-    const url = this.createUrl(`${API_CONFIG.BASE_URL}/api/weather/forecast`,{
+    const url = this.createUrl(`${API_CONFIG.WEATHER_BASE_URL}/forecast`,{
             lat : lat.toString(),
             lon : lon.toString(),
-            units:API_CONFIG.DEFAULT_PARAMS.units
+            units:API_CONFIG.DEFAULT_PARAMS.units,
+            appid: this.getApiKey(),
 
     });
         return this.fetchData<ForecastData>(url);
     }
     async reverseGeocode({lat, lon}: Coordinates):Promise<GeocodingResponse[]> {
-        const url = this.createUrl(`${API_CONFIG.BASE_URL}/api/location/reverse`, {
+        const url = this.createUrl(`${API_CONFIG.GEO_BASE_URL}/reverse`, {
             lat: lat.toString(),
             lon: lon.toString(),
-            limit: "1"
+            limit: "1",
+            appid: this.getApiKey(),
             });
         return this.fetchData<GeocodingResponse[]>(url);
     }
     async searchLocation(
         query:string)
     : Promise<GeocodingResponse[]> {
-        const url = this.createUrl(`${API_CONFIG.BASE_URL}/api/location/search`, {
+        const url = this.createUrl(`${API_CONFIG.GEO_BASE_URL}/direct`, {
             q: query,
-            limit: "10"
+            limit: "10",
+            appid: this.getApiKey(),
             });
         return this.fetchData<GeocodingResponse[]>(url);
     }
