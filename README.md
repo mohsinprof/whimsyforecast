@@ -24,7 +24,13 @@ npm install
 Create a `.env` file in the project root:
 
 ```env
-VITE_OPENWEATHER_API_KEY=your_openweather_api_key
+OPENWEATHER_API_KEY=your_openweather_api_key
+```
+
+For local serverless + frontend routing, run with Netlify Dev:
+
+```bash
+npx netlify dev
 ```
 
 ### 3) Run development server
@@ -61,11 +67,11 @@ For all platforms:
 1. Connect your GitHub repository
 2. Set build command: `npm run build`
 3. Set output directory: `dist`
-4. Add environment variable: `VITE_OPENWEATHER_API_KEY`
+4. Add environment variable: `OPENWEATHER_API_KEY`
 
 ## API Key Security Note
 
-Frontend environment variables (like `VITE_*`) are included in client bundles and are not fully secret.
+Do not store private keys in `VITE_*` variables because they are included in client bundles.
 
 ## Project Structure
 
